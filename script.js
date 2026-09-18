@@ -147,7 +147,7 @@ let currentQuestion = 0;
 
 
 /* =========================================
-   COMENÇAR MANUAL
+   COMENÇAR
 ========================================= */
 
 function startManual() {
@@ -191,13 +191,17 @@ function showQuestion() {
             <button
                 class="answer-button yes-button"
                 onclick="answerYes()">
+
                 SÍ
+
             </button>
 
             <button
                 class="answer-button no-button"
                 onclick="answerNo()">
+
                 NO
+
             </button>
 
         </div>
@@ -207,17 +211,18 @@ function showQuestion() {
 
 
 /* =========================================
-   RESPON SÍ
+   SÍ
 ========================================= */
 
 function answerYes() {
 
     nextQuestion();
+
 }
 
 
 /* =========================================
-   RESPON NO
+   NO
 ========================================= */
 
 function answerNo() {
@@ -225,6 +230,7 @@ function answerNo() {
     const content = document.getElementById("content");
 
     const question = questions[currentQuestion];
+
 
     content.innerHTML = `
 
@@ -241,7 +247,9 @@ function answerNo() {
             <button
                 class="done-button"
                 onclick="nextQuestion()">
+
                 FET
+
             </button>
 
             <h2>
@@ -266,14 +274,18 @@ function nextQuestion() {
 
     currentQuestion++;
 
+
     if (currentQuestion >= questions.length) {
 
         showFinish();
 
         return;
+
     }
 
+
     showQuestion();
+
 }
 
 
@@ -286,7 +298,9 @@ function showFinish() {
     document.getElementById("progress").textContent =
         "Diagnosi completada";
 
+
     const content = document.getElementById("content");
+
 
     content.innerHTML = `
 
@@ -313,7 +327,9 @@ function showFinish() {
             <button
                 class="restart-button"
                 onclick="restartManual()">
+
                 TORNAR A COMENÇAR
+
             </button>
 
         </div>
@@ -330,5 +346,10 @@ function restartManual() {
 
     currentQuestion = 0;
 
+    document.getElementById("manual").classList.add("hidden");
+
+    document.getElementById("cover").classList.remove("hidden");
+
     showQuestion();
+
 }
