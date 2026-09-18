@@ -1,448 +1,355 @@
-/* ============================================================
-   RESTAURACIÓ SEAT FURA 900
-   SISTEMA DE PREGUNTES SÍ / NO
-   ============================================================ */
-
-
-/* ------------------------------------------------------------
-   PREGUNTES
-   ------------------------------------------------------------
-
-   Cada pregunta té:
-
-   question = pregunta que apareix a la pantalla
-
-   noTitle = títol que apareix si contestem NO
-
-   noText = explicació del que s'ha de fer si contestem NO
------------------------------------------------------------- */
-
-
 const questions = [
 
     {
         question: "El motor gira?",
         noTitle: "El motor no gira",
-        noText:
-            "Posa la primera marxa, treu el fre de mà i empeny el cotxe suaument. L'objectiu és comprovar si el motor es pot fer girar. Si continua sense girar, el motor pot estar bloquejat o gripat i caldrà revisar-lo abans de continuar."
+        noText: "Posa primera marxa, treu el fre de mà i empeny el cotxe per comprovar si el motor gira. Si les rodes es bloquegen i el motor no es mou, pot estar gripat o bloquejat i caldrà revisar l'interior del motor."
     },
-
 
     {
         question: "La bateria i el motor d'arrencada funcionen?",
-        noTitle: "Revisa la bateria i el motor d'arrencada",
-        noText:
-            "Comprova que la bateria estigui carregada i que els borns estiguin nets i ben subjectats. Si la bateria està bé però el motor d'arrencada no funciona, cal revisar el motor d'arrencada, els cables i les connexions."
+        noTitle: "Revisa la bateria i l'arrencada",
+        noText: "Comprova l'estat de la bateria, les connexions i els cables. Revisa també el motor d'arrencada i comprova si gira correctament quan intentes arrencar."
     },
-
 
     {
         question: "Hi ha espurna a les bugies?",
         noTitle: "Revisa el sistema d'encesa",
-        noText:
-            "Cal revisar les bugies, els cables d'alta, el distribuïdor, la bobina i les connexions del sistema d'encesa. L'objectiu és aconseguir una espurna correcta abans de continuar."
+        noText: "Comprova les bugies, els cables d'alta tensió, la bobina, el distribuïdor i les seves connexions. Cal assegurar-se que l'espurna arriba correctament a les bugies."
     },
-
 
     {
         question: "El motor rep gasolina?",
-        noTitle: "Revisa el sistema de combustible",
-        noText:
-            "Comprova que hi hagi gasolina al dipòsit. Després revisa el conducte de gasolina, el filtre, la bomba de gasolina i el carburador. El combustible ha d'arribar correctament al motor."
+        noTitle: "Revisa l'alimentació de combustible",
+        noText: "Comprova que hi hagi gasolina al dipòsit i que arribi correctament al carburador. Revisa les mànegues, el filtre de gasolina i la bomba de combustible."
     },
-
 
     {
         question: "La combustió està ben sincronitzada?",
-        noTitle: "Revisa el punt d'encesa i la distribució",
-        noText:
-            "Cal comprovar que el punt d'encesa sigui correcte i que la distribució estigui ben sincronitzada. Ajusta el sistema segons les especificacions del motor."
+        noTitle: "Revisa la sincronització",
+        noText: "Comprova el punt d'encesa i la posició del distribuïdor. Revisa també que la distribució del motor estigui correctament sincronitzada."
     },
-
 
     {
         question: "El motor té bona compressió?",
-        noTitle: "Revisa l'interior del motor",
-        noText:
-            "Cal comprovar la compressió del motor. Si és massa baixa, pot ser necessari revisar la culata, les vàlvules, la junta de culata, els pistons, els segments i els cilindres."
+        noTitle: "Revisa la compressió del motor",
+        noText: "Fes una prova de compressió als cilindres. Si algun cilindre té una compressió massa baixa, cal revisar vàlvules, junta de culata, pistons, segments i cilindres."
     },
-
 
     {
         question: "Hi ha oli al motor i està en bon estat?",
-        noTitle: "Canvia l'oli del motor",
-        noText:
-            "Comprova el nivell d'oli amb la vareta. Si el nivell és baix o l'oli està en mal estat, fes un canvi d'oli i posa l'oli adequat per al motor."
+        noTitle: "Revisa l'oli del motor",
+        noText: "Comprova el nivell d'oli i el seu estat. Si està molt degradat o contaminat, cal substituir-lo abans de continuar."
     },
-
 
     {
         question: "El filtre d'oli està en bon estat?",
-        noTitle: "Substitueix el filtre d'oli",
-        noText:
-            "Substitueix el filtre d'oli per un de nou. Després comprova que no hi hagi cap fuita d'oli."
+        noTitle: "Canvia o revisa el filtre d'oli",
+        noText: "Comprova que el filtre no estigui obstruït o excessivament brut. Si és necessari, substitueix-lo."
     },
-
 
     {
         question: "El sistema de refrigeració té líquid i no té fuites?",
-        noTitle: "Revisa el sistema de refrigeració",
-        noText:
-            "Comprova el nivell del líquid refrigerant i revisa el radiador, els manguitos i les connexions. Repara qualsevol fuita abans de continuar."
+        noTitle: "Revisa la refrigeració",
+        noText: "Comprova el nivell del líquid refrigerant i revisa radiador, mànegues, unions i bomba d'aigua per detectar possibles fuites."
     },
-
 
     {
         question: "El motor manté una temperatura correcta?",
-        noTitle: "Revisa la refrigeració del motor",
-        noText:
-            "Comprova el radiador, el termòstat, la bomba d'aigua i el circuit de refrigeració. No mantinguis el motor funcionant si s'escalfa excessivament."
+        noTitle: "Revisa la temperatura del motor",
+        noText: "Comprova que el motor no s'escalfi massa ni treballi a una temperatura incorrecta. Revisa el termòstat, el radiador i el circuit de refrigeració."
     },
-
 
     {
         question: "El ventilador entra en funcionament quan toca?",
         noTitle: "Revisa el ventilador",
-        noText:
-            "Comprova el ventilador, el termocontacte, els fusibles, el cablejat i les connexions. El ventilador ha d'entrar en funcionament quan el motor arriba a la temperatura corresponent."
+        noText: "Comprova que el ventilador funcioni quan el motor arriba a la temperatura de funcionament. Revisa el seu sistema d'accionament i les connexions."
     },
-
 
     {
         question: "L'embragatge funciona correctament?",
         noTitle: "Revisa l'embragatge",
-        noText:
-            "Comprova que el pedal funcioni correctament i que l'embragatge transmeti la força sense patinar. Si hi ha problemes, cal revisar el mecanisme, el disc, el plat i el collarí."
+        noText: "Comprova que el pedal tingui un funcionament correcte i que l'embragatge permeti connectar i desconnectar el motor de la caixa de canvis sense patinar ni quedar enganxat."
     },
-
 
     {
         question: "La caixa de canvis funciona i entren totes les marxes?",
         noTitle: "Revisa la caixa de canvis",
-        noText:
-            "Comprova que totes les marxes entrin correctament. Si no entren o fan sorolls anormals, cal revisar el comandament del canvi, l'embragatge i la caixa de canvis."
+        noText: "Comprova que totes les marxes entrin correctament i que la palanca no presenti problemes. Revisa també el mecanisme de selecció."
     },
-
 
     {
         question: "Els palieres i la transmissió estan en bon estat?",
         noTitle: "Revisa la transmissió",
-        noText:
-            "Revisa els palieres, les juntes i els guardapols. Si hi ha joc excessiu, cops, esquerdes o pèrdues de greix, cal reparar-los abans de circular."
+        noText: "Inspecciona els palieres, juntes i elements de transmissió. Comprova que no tinguin joc excessiu, esquerdes o danys."
     },
-
 
     {
         question: "Els pneumàtics estan en bon estat?",
-        noTitle: "Canvia els pneumàtics",
-        noText:
-            "Comprova que els pneumàtics no estiguin excessivament desgastats, esquerdats o deformats. Comprova també que tinguin la pressió correcta. Si no estan en condicions, substitueix-los."
+        noTitle: "Revisa els pneumàtics",
+        noText: "Comprova que els pneumàtics no tinguin esquerdes, deformacions o desgast excessiu i que mantinguin una pressió adequada."
     },
-
 
     {
         question: "Les rodes giren correctament i no tenen joc excessiu?",
-        noTitle: "Revisa les rodes i els rodaments",
-        noText:
-            "Comprova que les rodes girin correctament i que no hi hagi un joc anormal. Cal revisar els rodaments, els bujes i els elements associats."
+        noTitle: "Revisa les rodes",
+        noText: "Aixeca el vehicle de manera segura i comprova que les rodes girin correctament i que els rodaments i altres elements no tinguin un joc excessiu."
     },
-
 
     {
         question: "Els amortidors estan en bon estat?",
         noTitle: "Revisa els amortidors",
-        noText:
-            "Comprova que els amortidors no tinguin fuites d'oli ni danys visibles. També comprova que el cotxe no reboti excessivament. Si estan malmesos, cal substituir-los."
+        noText: "Comprova que no hi hagi fuites d'oli i que els amortidors treballin correctament. També revisa el seu estat general."
     },
-
 
     {
         question: "Les barres estabilitzadores i els seus elements estan en bon estat?",
         noTitle: "Revisa les barres estabilitzadores",
-        noText:
-            "Revisa els silentblocks, les bieletes i els seus ancoratges. Si estan trencats, esquerdats o tenen massa joc, cal substituir-los."
+        noText: "Comprova les barres estabilitzadores, silentblocks, bieletes i les seves fixacions. Busca esquerdes, desgast o jocs excessius."
     },
-
 
     {
         question: "La direcció funciona correctament i no té joc excessiu?",
         noTitle: "Revisa la direcció",
-        noText:
-            "Comprova que el volant mogui les rodes amb normalitat i que no hi hagi un joc excessiu. Si hi ha problemes, cal revisar la caixa de direcció, les ròtules i els terminals."
+        noText: "Comprova el volant, la caixa o cremallera de direcció, les ròtules i les articulacions. No hi ha d'haver un joc excessiu."
     },
-
 
     {
         question: "El pedal de fre funciona correctament?",
-        noTitle: "Revisa els frens abans de continuar",
-        noText:
-            "El pedal de fre ha de tenir una sensació ferma i no hauria de baixar fins al fons. Si el pedal està molt tou o baixa massa, no circulis amb el vehicle i fes revisar el sistema de frens."
+        noTitle: "Revisa el pedal de fre",
+        noText: "Comprova que el pedal tingui un tacte correcte i que no baixi excessivament. Revisa també possibles fuites del sistema de frens."
     },
-
 
     {
         question: "Els frens de les quatre rodes funcionen correctament?",
-        noTitle: "Revisa el sistema de frens",
-        noText:
-            "Cal revisar discos o tambors, pastilles o sabates, bombes, conduccions i líquid de frens. No circulis fins solucionar qualsevol problema del sistema de frenada."
+        noTitle: "Revisa els frens",
+        noText: "Comprova discs o tambors, pastilles o sabates, bombins o pinces, tubs i mànegues. Cal assegurar-se que les quatre rodes frenen correctament."
     },
-
 
     {
         question: "El fre de mà funciona correctament?",
-        noTitle: "Repara o ajusta el fre de mà",
-        noText:
-            "Comprova que el fre de mà mantingui el vehicle immobilitzat. Si no ho fa, cal revisar i ajustar el mecanisme."
+        noTitle: "Revisa el fre de mà",
+        noText: "Comprova que el fre de mà actuï correctament sobre les rodes corresponents i que mantingui el vehicle immobilitzat."
     },
-
 
     {
         question: "Els fars funcionen?",
         noTitle: "Revisa els fars",
-        noText:
-            "Comprova les bombetes, els fusibles, els interruptors i el cablejat. Substitueix o repara l'element que estigui fallant."
+        noText: "Comprova les bombetes, els fusibles, els cables, les connexions i els interruptors dels fars."
     },
-
 
     {
         question: "Funcionen els intermitents?",
         noTitle: "Revisa els intermitents",
-        noText:
-            "Comprova les bombetes, els fusibles, el comandament i el cablejat. Repara qualsevol avaria."
+        noText: "Comprova les bombetes, fusibles, connexions i el sistema d'intermitència."
     },
-
 
     {
         question: "Funcionen les llums de fre?",
         noTitle: "Revisa les llums de fre",
-        noText:
-            "Comprova les bombetes, el fusible, el cablejat i l'interruptor del pedal de fre."
+        noText: "Comprova les bombetes i el sensor o interruptor del pedal de fre, així com les connexions elèctriques."
     },
-
 
     {
         question: "Funcionen les llums de posició i matrícula?",
-        noTitle: "Revisa les llums",
-        noText:
-            "Comprova les bombetes, els fusibles i el cablejat. Substitueix o repara els elements que no funcionin."
+        noTitle: "Revisa les llums de posició i matrícula",
+        noText: "Comprova bombetes, fusibles, cables i connexions de les llums de posició i de la matrícula."
     },
-
 
     {
         question: "El clàxon funciona?",
         noTitle: "Revisa el clàxon",
-        noText:
-            "Comprova el fusible, el botó, el cablejat i el mateix clàxon."
+        noText: "Comprova el clàxon, el fusible, les connexions i el comandament del volant."
     },
-
 
     {
         question: "La carrosseria i el xassís estan en condicions segures per circular?",
-        noTitle: "Repara la carrosseria o el xassís",
-        noText:
-            "Revisa especialment l'òxid, les zones estructurals, els ancoratges i qualsevol deformació important. Qualsevol problema que afecti la seguretat s'ha de reparar abans de circular."
+        noTitle: "Revisa la carrosseria i el xassís",
+        noText: "Comprova que no hi hagi corrosió estructural, esquerdes, deformacions o danys que puguin comprometre la seguretat del vehicle."
     }
 
 ];
 
 
-/* ------------------------------------------------------------
-   VARIABLES
------------------------------------------------------------- */
-
 let currentQuestion = 0;
 
 
-/* ------------------------------------------------------------
-   ELEMENT PRINCIPAL
------------------------------------------------------------- */
+/* =========================
+   COMENÇAR
+========================= */
 
-const appContent = document.getElementById("app-content");
-const progress = document.getElementById("progress");
+function startManual() {
+
+    document.getElementById("cover").classList.add("hidden");
+    document.getElementById("manual").classList.remove("hidden");
+
+    currentQuestion = 0;
+
+    showQuestion();
+}
 
 
-/* ------------------------------------------------------------
+/* =========================
    MOSTRAR PREGUNTA
------------------------------------------------------------- */
+========================= */
 
 function showQuestion() {
 
+    const content = document.getElementById("content");
+
     const question = questions[currentQuestion];
 
-    progress.textContent =
-        `${currentQuestion + 1} / ${questions.length}`;
+    document.getElementById("progress").textContent =
+        `Pregunta ${currentQuestion + 1} de ${questions.length}`;
 
 
-    appContent.innerHTML = `
+    content.innerHTML = `
 
-        <section class="question-container">
+        <div class="question-number">
+            PREGUNTA ${currentQuestion + 1}
+        </div>
 
-            <p class="question-number">
-                Pregunta ${currentQuestion + 1}
-            </p>
+        <h1 class="question">
+            ${question.question}
+        </h1>
 
-            <h1 class="question">
-                ${question.question}
-            </h1>
+        <div class="answer-buttons">
 
-            <div class="buttons">
+            <button
+                class="answer-button yes-button"
+                onclick="answerYes()">
+                SÍ
+            </button>
 
-                <button
-                    class="answer-button yes-button"
-                    onclick="answerYes()">
-                    SÍ
-                </button>
+            <button
+                class="answer-button no-button"
+                onclick="answerNo()">
+                NO
+            </button>
 
-                <button
-                    class="answer-button no-button"
-                    onclick="answerNo()">
-                    NO
-                </button>
-
-            </div>
-
-        </section>
+        </div>
 
     `;
 }
 
 
-/* ------------------------------------------------------------
-   SI
------------------------------------------------------------- */
+/* =========================
+   RESPONDRE SÍ
+========================= */
 
 function answerYes() {
 
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
-
         showFinish();
-
-    } else {
-
-        showQuestion();
-
+        return;
     }
 
+    showQuestion();
 }
 
 
-/* ------------------------------------------------------------
-   NO
------------------------------------------------------------- */
+/* =========================
+   RESPONDRE NO
+========================= */
 
 function answerNo() {
 
+    const content = document.getElementById("content");
+
     const question = questions[currentQuestion];
 
-    appContent.innerHTML = `
+    content.innerHTML = `
 
-        <section class="problem-container">
+        <div class="problem-box">
 
-            <div class="problem-box">
+            <button
+                class="done-button"
+                onclick="problemFixed()">
+                FET
+            </button>
 
-                <button
-                    class="done-button"
-                    onclick="problemFixed()">
-                    FET
-                </button>
+            <h2>
+                ${question.noTitle}
+            </h2>
 
-                <p class="problem-label">
-                    PROBLEMA DETECTAT
-                </p>
+            <p>
+                ${question.noText}
+            </p>
 
-                <h1 class="problem-title">
-                    ${question.noTitle}
-                </h1>
-
-                <p class="problem-text">
-                    ${question.noText}
-                </p>
-
-            </div>
-
-        </section>
+        </div>
 
     `;
-
 }
 
 
-/* ------------------------------------------------------------
-   FET
------------------------------------------------------------- */
+/* =========================
+   BOTÓ FET
+========================= */
 
 function problemFixed() {
 
     currentQuestion++;
 
     if (currentQuestion >= questions.length) {
-
         showFinish();
-
-    } else {
-
-        showQuestion();
-
+        return;
     }
 
+    showQuestion();
 }
 
 
-/* ------------------------------------------------------------
+/* =========================
    FINAL
------------------------------------------------------------- */
+========================= */
 
 function showFinish() {
 
-    progress.textContent = "COMPLETAT";
+    document.getElementById("progress").textContent =
+        "Manual completat";
 
-    appContent.innerHTML = `
+    const content = document.getElementById("content");
 
-        <section class="finish-container">
+    content.innerHTML = `
 
-            <div class="finish-icon">
-                ✓
-            </div>
+        <div class="finish-screen">
 
-            <h1 class="finish-title">
-                Revisió completada
-            </h1>
+            <h1>Revisió completada</h1>
 
-            <p class="finish-text">
-                Has completat totes les comprovacions del formulari
-                de restauració del SEAT Fura 900.
+            <p>
+                Has completat totes les comprovacions del manual
+                de diagnosi i restauració.
+            </p>
+
+            <p>
+                Abans de circular, cal verificar que el vehicle
+                compleix totes les condicions de seguretat i
+                els requisits legals corresponents.
             </p>
 
             <button
                 class="restart-button"
                 onclick="restart()">
-                Tornar a començar
+                TORNAR A COMENÇAR
             </button>
 
-        </section>
+        </div>
 
     `;
-
 }
 
 
-/* ------------------------------------------------------------
-   REINICIAR
------------------------------------------------------------- */
+/* =========================
+   TORNAR A COMENÇAR
+========================= */
 
 function restart() {
 
     currentQuestion = 0;
 
-    showQuestion();
+    document.getElementById("manual").classList.add("hidden");
+    document.getElementById("cover").classList.remove("hidden");
 
 }
-
-
-/* ------------------------------------------------------------
-   INICIAR APLICACIÓ
------------------------------------------------------------- */
-
-showQuestion();

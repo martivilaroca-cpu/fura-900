@@ -3,37 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Restauració SEAT Fura 900</title>
-
+    <title>Manual de reparació de cotxes clàssics</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="app">
+    <!-- PORTADA -->
+    <section id="cover" class="screen cover-screen">
+        <div class="cover-content">
+            <p class="small-title">PROJECTE DE RESTAURACIÓ</p>
 
-        <!-- CAPÇALERA -->
-        <header class="header">
-            <div>
-                <p class="small-title">PROJECTE DE RESTAURACIÓ</p>
-                <h2>SEAT Fura 900</h2>
-            </div>
+            <h1>Manual de reparació<br>de cotxes clàssics</h1>
 
-            <div class="progress" id="progress">
-                1 / 1
+            <p class="cover-subtitle">
+                Guia de diagnosi i restauració
+            </p>
+
+            <button class="start-button" onclick="startManual()">
+                COMENÇAR
+            </button>
+        </div>
+    </section>
+
+
+    <!-- MANUAL -->
+    <main id="manual" class="screen hidden">
+
+        <header>
+            <p class="project-title">MANUAL DE REPARACIÓ</p>
+
+            <div class="progress-container">
+                <span id="progress">Pregunta 1 de 29</span>
             </div>
         </header>
 
+        <section id="content">
+            <!-- El JavaScript posa aquí les preguntes -->
+        </section>
 
-        <!-- CONTINGUT PRINCIPAL -->
-        <main id="app-content">
-
-            <!-- JavaScript carregarà aquí les preguntes -->
-
-        </main>
-
-    </div>
+    </main>
 
     <script src="script.js"></script>
 
