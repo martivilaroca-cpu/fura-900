@@ -1,3 +1,7 @@
+/* =========================================================
+   PREGUNTES
+========================================================= */
+
 const questions = [
 
     {
@@ -146,45 +150,60 @@ const questions = [
 let currentQuestion = 0;
 
 
-/* =========================================
-   COMENÇAR
-========================================= */
+/* =========================================================
+   INICIAR MANUAL
+========================================================= */
 
 function startManual() {
 
-    document.getElementById("cover").classList.add("hidden");
+    document
+        .getElementById("cover")
+        .classList.add("hidden");
 
-    document.getElementById("manual").classList.remove("hidden");
+    document
+        .getElementById("manual")
+        .classList.remove("hidden");
 
     currentQuestion = 0;
+
+    updateProgress();
 
     showQuestion();
 }
 
 
-/* =========================================
+/* =========================================================
    MOSTRAR PREGUNTA
-========================================= */
+========================================================= */
 
 function showQuestion() {
 
-    const content = document.getElementById("content");
+    const content =
+        document.getElementById("content");
 
-    const question = questions[currentQuestion];
+    const question =
+        questions[currentQuestion];
 
-    document.getElementById("progress").textContent =
-        `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+
+    content.style.animation = "none";
+
+    void content.offsetWidth;
+
+    content.style.animation =
+        "contentAppear .5s ease";
 
 
     content.innerHTML = `
 
         <div class="question-number">
-            DIAGNOSI
+            DIAGNOSI · PAS ${String(currentQuestion + 1).padStart(2, "0")}
         </div>
+
 
         <h1 class="question">
             ${question.question}
         </h1>
+
 
         <div class="answer-buttons">
 
@@ -195,6 +214,7 @@ function showQuestion() {
                 SÍ
 
             </button>
+
 
             <button
                 class="answer-button no-button"
@@ -207,29 +227,40 @@ function showQuestion() {
         </div>
 
     `;
+
+    updateProgress();
 }
 
 
-/* =========================================
-   SÍ
-========================================= */
+/* =========================================================
+   RESPOSTA SÍ
+========================================================= */
 
 function answerYes() {
 
     nextQuestion();
-
 }
 
 
-/* =========================================
-   NO
-========================================= */
+/* =========================================================
+   RESPOSTA NO
+========================================================= */
 
 function answerNo() {
 
-    const content = document.getElementById("content");
+    const content =
+        document.getElementById("content");
 
-    const question = questions[currentQuestion];
+    const question =
+        questions[currentQuestion];
+
+
+    content.style.animation = "none";
+
+    void content.offsetWidth;
+
+    content.style.animation =
+        "contentAppear .5s ease";
 
 
     content.innerHTML = `
@@ -238,9 +269,11 @@ function answerNo() {
             PROBLEMA DETECTAT
         </div>
 
+
         <h1 class="question">
             ${question.question}
         </h1>
+
 
         <div class="problem-box">
 
@@ -252,9 +285,11 @@ function answerNo() {
 
             </button>
 
+
             <h2>
                 Què has de revisar
             </h2>
+
 
             <p>
                 ${question.problem}
@@ -266,40 +301,92 @@ function answerNo() {
 }
 
 
-/* =========================================
+/* =========================================================
    SEGÜENT PREGUNTA
-========================================= */
+========================================================= */
 
 function nextQuestion() {
 
     currentQuestion++;
 
 
-    if (currentQuestion >= questions.length) {
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
 
         showFinish();
 
         return;
-
     }
 
 
     showQuestion();
-
 }
 
 
-/* =========================================
-   FINAL
-========================================= */
+/* =========================================================
+   ACTUALITZAR PROGRÉS
+========================================================= */
+
+function updateProgress() {
+
+    const total =
+        questions.length;
+
+    const current =
+        currentQuestion + 1;
+
+
+    const percentage =
+        (currentQuestion / total) * 100;
+
+
+    document
+        .getElementById("progress")
+        .textContent =
+        `Pregunta ${current} de ${total}`;
+
+
+    document
+        .getElementById("progress-bar")
+        .style.width =
+        `${percentage}%`;
+
+
+    document
+        .getElementById("footer-step")
+        .textContent =
+        `${String(current).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
+}
+
+
+/* =========================================================
+   PANTALLA FINAL
+========================================================= */
 
 function showFinish() {
 
-    document.getElementById("progress").textContent =
+    document
+        .getElementById("progress")
+        .textContent =
         "Diagnosi completada";
 
 
-    const content = document.getElementById("content");
+    document
+        .getElementById("progress-bar")
+        .style.width =
+        "100%";
+
+
+    document
+        .getElementById("footer-step")
+        .textContent =
+        "FINAL";
+
+
+    const content =
+        document.getElementById("content");
 
 
     content.innerHTML = `
@@ -310,10 +397,12 @@ function showFinish() {
                 PROCÉS COMPLETAT
             </div>
 
+
             <h1>
                 Revisió<br>
                 completada
             </h1>
+
 
             <p>
                 Has completat totes les comprovacions
@@ -323,6 +412,7 @@ function showFinish() {
                 l'estat general del vehicle i compleix
                 els requisits legals i de seguretat.
             </p>
+
 
             <button
                 class="restart-button"
@@ -338,18 +428,30 @@ function showFinish() {
 }
 
 
-/* =========================================
+/* =========================================================
    REINICIAR
-========================================= */
+========================================================= */
 
 function restartManual() {
 
     currentQuestion = 0;
 
-    document.getElementById("manual").classList.add("hidden");
 
-    document.getElementById("cover").classList.remove("hidden");
+    document
+        .getElementById("manual")
+        .classList.add("hidden");
 
-    showQuestion();
 
+    document
+        .getElementById("cover")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("progress-bar")
+        .style.width =
+        "0%";
+
+
+    updateProgress();
 }

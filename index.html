@@ -5,61 +5,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Manual de reparació de cotxes clàssics</title>
+    <meta name="description"
+        content="Manual interactiu de diagnosi, reparació i restauració de vehicles clàssics.">
+
+    <title>Manual de Reparació | Diagnosi de Vehicles Clàssics</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- =========================
+    <!-- =====================================================
          PORTADA
-    ========================== -->
+    ====================================================== -->
 
     <section id="cover" class="cover-screen">
 
+        <!-- IMATGE DE FONS -->
         <div class="cover-background"></div>
+
+        <!-- CAPA FOSCA -->
         <div class="cover-overlay"></div>
 
-        <div class="cover-top">
-            <span>PROJECTE DE RESTAURACIÓ</span>
-            <span>SEAT FURA 900 · 1985</span>
-        </div>
+        <!-- EFECTE DE LLUM -->
+        <div class="cover-glow"></div>
 
-        <div class="red-line"></div>
+        <!-- DECORACIÓ -->
+        <div class="cover-grid"></div>
+
+
+        <!-- CONTINGUT PRINCIPAL -->
 
         <div class="cover-content">
 
             <div class="project-label">
+                <span class="label-dot"></span>
                 MANUAL TÈCNIC
             </div>
 
             <h1>
-                MANUAL DE<br>
+                MANUAL DE
                 <span>REPARACIÓ</span>
             </h1>
 
             <p class="cover-subtitle">
-                Guia de diagnosi i restauració<br>
-                de cotxes clàssics
+                Guia interactiva de diagnosi i restauració
+                <br>
+                per a vehicles clàssics
             </p>
+
 
             <button
                 class="start-button"
                 onclick="startManual()">
 
-                <span>COMENÇAR</span>
+                <span class="button-text">
+                    COMENÇAR DIAGNOSI
+                </span>
 
-                <span class="arrow">→</span>
+                <span class="button-arrow">
+                    →
+                </span>
 
             </button>
 
+
+            <div class="cover-info">
+
+                <div class="info-item">
+                    <strong>28</strong>
+                    <span>COMPROVACIONS</span>
+                </div>
+
+                <div class="info-separator"></div>
+
+                <div class="info-item">
+                    <strong>01</strong>
+                    <span>PROCÉS GUIAT</span>
+                </div>
+
+                <div class="info-separator"></div>
+
+                <div class="info-item">
+                    <strong>100%</strong>
+                    <span>INTERACTIU</span>
+                </div>
+
+            </div>
+
         </div>
+
+
+        <!-- PEU DE PORTADA -->
 
         <div class="cover-bottom">
 
             <span>
-                DIAGNOSI · MECÀNICA · RESTAURACIÓ
+                DIAGNOSI · MECÀNICA · SEGURETAT
             </span>
 
             <span>
@@ -68,22 +110,51 @@
 
         </div>
 
+
+        <!-- INDICADOR SCROLL -->
+
+        <div class="scroll-indicator">
+
+            <span>INICIAR</span>
+
+            <div class="scroll-line"></div>
+
+        </div>
+
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================================
          MANUAL
-    ========================== -->
+    ====================================================== -->
 
-    <main id="manual" class="screen hidden">
+    <main id="manual" class="manual-screen hidden">
 
-        <header>
 
-            <p class="project-title">
-                MANUAL DE REPARACIÓ
-            </p>
+        <!-- HEADER -->
 
-            <div class="progress-container">
+        <header class="manual-header">
+
+            <div class="header-left">
+
+                <div class="brand-mark">
+                    F
+                </div>
+
+                <div>
+                    <p class="brand-title">
+                        MANUAL DE REPARACIÓ
+                    </p>
+
+                    <p class="brand-subtitle">
+                        Diagnosi de vehicles clàssics
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
 
                 <span id="progress">
                     Pregunta 1 de 28
@@ -93,7 +164,37 @@
 
         </header>
 
+
+        <!-- BARRA DE PROGRÉS -->
+
+        <div class="progress-bar-container">
+
+            <div
+                id="progress-bar"
+                class="progress-bar">
+            </div>
+
+        </div>
+
+
+        <!-- CONTINGUT -->
+
         <section id="content"></section>
+
+
+        <!-- FOOTER -->
+
+        <footer class="manual-footer">
+
+            <span>
+                MANUAL TÈCNIC · RESTAURACIÓ AUTOMÒBIL
+            </span>
+
+            <span id="footer-step">
+                01 / 28
+            </span>
+
+        </footer>
 
     </main>
 

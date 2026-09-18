@@ -1,6 +1,6 @@
-/* =========================================
-   GENERAL
-========================================= */
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -8,27 +8,40 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #080808;
-    color: white;
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #070707;
+    color: #ffffff;
+
     min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+button {
+    font-family: inherit;
 }
 
 .hidden {
     display: none !important;
 }
 
-.screen {
-    min-height: 100vh;
-}
 
-
-/* =========================================
+/* =========================================================
    PORTADA
-========================================= */
+========================================================= */
 
 .cover-screen {
+
     position: relative;
 
     width: 100%;
@@ -38,18 +51,25 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: center;
+
+    background: #080808;
 }
 
 
-/* IMATGE */
+/* =========================================================
+   IMATGE DE FONS
+========================================================= */
 
 .cover-background {
+
     position: absolute;
 
-    inset: 0;
+    inset: -20px;
 
-    background-image: url("cotxe-classic.webp");
+    z-index: 0;
+
+    background-image:
+        url("cotxe-classic.webp");
 
     background-size: cover;
 
@@ -59,13 +79,16 @@ body {
 
     transform: scale(1.03);
 
-    z-index: 0;
+    animation: backgroundZoom 18s ease-out forwards;
 }
 
 
-/* CAPA FOSCA */
+/* =========================================================
+   CAPA FOSCA
+========================================================= */
 
 .cover-overlay {
+
     position: absolute;
 
     inset: 0;
@@ -73,20 +96,51 @@ body {
     z-index: 1;
 
     background:
+
         linear-gradient(
             90deg,
-            rgba(0, 0, 0, 0.90) 0%,
-            rgba(0, 0, 0, 0.70) 35%,
-            rgba(0, 0, 0, 0.35) 70%,
-            rgba(0, 0, 0, 0.60) 100%
+            rgba(0, 0, 0, 0.94) 0%,
+            rgba(0, 0, 0, 0.82) 27%,
+            rgba(0, 0, 0, 0.48) 58%,
+            rgba(0, 0, 0, 0.55) 100%
         );
 }
 
 
-/* COLOR VERMELL */
+/* =========================================================
+   BRILLANTOR VERMELLA
+========================================================= */
 
-.cover-screen::after {
-    content: "";
+.cover-glow {
+
+    position: absolute;
+
+    width: 700px;
+    height: 700px;
+
+    right: -200px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(214, 40, 40, 0.22),
+            transparent 68%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   GRID DECORATIU
+========================================================= */
+
+.cover-grid {
 
     position: absolute;
 
@@ -94,293 +148,455 @@ body {
 
     z-index: 2;
 
-    pointer-events: none;
+    opacity: 0.08;
 
-    background:
-        radial-gradient(
-            circle at 75% 50%,
-            rgba(214, 40, 40, 0.18),
-            transparent 40%
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.3) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.3) 1px,
+            transparent 1px
         );
+
+    background-size: 70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to right,
+            black,
+            transparent 80%
+        );
+
+    pointer-events: none;
 }
 
 
-/* =========================================
-   PART SUPERIOR
-========================================= */
-
-.cover-top {
-    position: absolute;
-
-    top: 35px;
-    left: 50px;
-    right: 50px;
-
-    z-index: 10;
-
-    display: flex;
-    justify-content: space-between;
-
-    color: rgba(255,255,255,0.75);
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-}
-
-
-/* =========================================
-   LÍNIA
-========================================= */
-
-.red-line {
-    position: absolute;
-
-    top: 95px;
-    left: 50px;
-
-    width: 110px;
-    height: 3px;
-
-    z-index: 10;
-
-    background: #d62828;
-
-    box-shadow:
-        0 0 15px rgba(214,40,40,0.8);
-}
-
-
-/* =========================================
-   CONTINGUT
-========================================= */
+/* =========================================================
+   CONTINGUT PORTADA
+========================================================= */
 
 .cover-content {
+
     position: relative;
 
     z-index: 10;
 
-    width: 90%;
-    max-width: 1100px;
+    width: min(1200px, 90%);
 
-    margin-left: 7%;
+    margin-left: 8%;
 
-    text-align: left;
+    padding: 80px 0;
 
-    animation: fadeUp 1s ease forwards;
+    animation:
+        coverAppear 1s
+        cubic-bezier(.16,1,.3,1)
+        forwards;
 }
 
 
-/* =========================================
+/* =========================================================
    ETIQUETA
-========================================= */
+========================================================= */
 
 .project-label {
-    display: inline-block;
 
-    padding: 9px 16px;
+    display: inline-flex;
 
-    margin-bottom: 22px;
+    align-items: center;
 
-    border-left: 3px solid #d62828;
+    gap: 10px;
 
-    background: rgba(0,0,0,0.40);
+    padding: 10px 16px;
 
-    backdrop-filter: blur(6px);
+    margin-bottom: 28px;
 
-    color: #eee;
+    border:
 
-    font-size: 12px;
+        1px solid
+        rgba(255,255,255,0.15);
 
-    font-weight: bold;
+    border-left:
+
+        3px solid
+        #d62828;
+
+    background:
+        rgba(0,0,0,0.35);
+
+    backdrop-filter: blur(12px);
+
+    color: rgba(255,255,255,0.85);
+
+    font-size: 11px;
+
+    font-weight: 700;
 
     letter-spacing: 4px;
 }
 
 
-/* =========================================
+/* PUNT */
+
+.label-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #d62828;
+
+    box-shadow:
+        0 0 12px
+        rgba(214,40,40,0.9);
+
+    animation: pulse 2s infinite;
+}
+
+
+/* =========================================================
    TÍTOL
-========================================= */
+========================================================= */
 
 .cover-content h1 {
-    font-size: clamp(55px, 8vw, 110px);
 
-    line-height: 0.9;
+    max-width: 1000px;
 
-    letter-spacing: -5px;
+    font-size:
+        clamp(58px, 9vw, 125px);
+
+    line-height: 0.88;
+
+    letter-spacing: -6px;
 
     font-weight: 900;
 
-    margin-bottom: 30px;
+    margin-bottom: 34px;
 
     text-shadow:
-        0 5px 25px rgba(0,0,0,0.9),
-        0 10px 50px rgba(0,0,0,0.7);
+
+        0 8px 35px
+        rgba(0,0,0,0.9);
 }
 
 .cover-content h1 span {
+
+    display: block;
+
     color: #d62828;
 
     text-shadow:
-        0 0 25px rgba(214,40,40,0.35);
+
+        0 0 30px
+        rgba(214,40,40,0.25);
 }
 
 
-/* =========================================
+/* =========================================================
    SUBTÍTOL
-========================================= */
+========================================================= */
 
 .cover-subtitle {
-    font-size: 20px;
 
-    line-height: 1.5;
+    color:
+        rgba(255,255,255,0.72);
 
-    color: rgba(255,255,255,0.80);
+    font-size: 19px;
+
+    line-height: 1.65;
 
     margin-bottom: 42px;
 
+    letter-spacing: 0.2px;
+
     text-shadow:
-        0 2px 10px rgba(0,0,0,0.9);
+        0 3px 15px
+        rgba(0,0,0,0.9);
 }
 
 
-/* =========================================
-   BOTÓ COMENÇAR
-========================================= */
+/* =========================================================
+   BOTÓ
+========================================================= */
 
 .start-button {
+
+    position: relative;
+
     display: inline-flex;
 
     align-items: center;
+
     justify-content: space-between;
 
-    gap: 35px;
+    gap: 30px;
 
-    min-width: 235px;
+    min-width: 275px;
 
-    padding: 15px 18px 15px 28px;
+    padding: 8px 8px 8px 28px;
 
-    border: 1px solid rgba(255,255,255,0.20);
+    border: none;
 
-    border-radius: 5px;
+    border-radius: 6px;
 
     background:
         linear-gradient(
             135deg,
             #d62828,
-            #941313
+            #a91414
         );
 
     color: white;
 
-    font-size: 15px;
+    cursor: pointer;
+
+    font-size: 13px;
 
     font-weight: 800;
 
-    letter-spacing: 3px;
-
-    cursor: pointer;
+    letter-spacing: 2px;
 
     box-shadow:
-        0 10px 30px rgba(0,0,0,0.6),
-        0 0 30px rgba(214,40,40,0.25);
+
+        0 15px 40px
+        rgba(0,0,0,0.55),
+
+        0 0 35px
+        rgba(214,40,40,0.22);
+
+    overflow: hidden;
 
     transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+        transform .3s ease,
+        box-shadow .3s ease;
 }
 
-.start-button:hover {
-    transform: translateY(-4px);
+
+/* efecte brillant */
+
+.start-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 70%;
+    height: 100%;
 
     background:
         linear-gradient(
-            135deg,
-            #ed3030,
-            #ad1515
+            90deg,
+            transparent,
+            rgba(255,255,255,0.18),
+            transparent
         );
 
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.7),
-        0 0 40px rgba(214,40,40,0.35);
+    transform: skewX(-20deg);
+
+    transition: .7s ease;
 }
 
-.start-button .arrow {
+.start-button:hover::before {
+    left: 130%;
+}
+
+.start-button:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+
+        0 20px 50px
+        rgba(0,0,0,0.65),
+
+        0 0 50px
+        rgba(214,40,40,0.38);
+}
+
+
+/* TEXT */
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* FLETXA */
+
+.button-arrow {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 48px;
+    height: 48px;
+
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    width: 40px;
-    height: 40px;
+    border-radius: 5px;
 
-    border-radius: 50%;
+    background:
+        rgba(255,255,255,0.12);
 
-    background: rgba(255,255,255,0.12);
+    font-size: 24px;
 
-    font-size: 22px;
-
-    transition: 0.25s ease;
+    transition:
+        transform .3s ease,
+        background .3s ease;
 }
 
-.start-button:hover .arrow {
-    transform: translateX(5px);
+.start-button:hover
+.button-arrow {
+
+    transform:
+        translateX(5px);
+
+    background:
+        rgba(255,255,255,0.18);
 }
 
 
-/* =========================================
+/* =========================================================
+   INFORMACIÓ
+========================================================= */
+
+.cover-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 28px;
+
+    margin-top: 55px;
+}
+
+.info-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.info-item strong {
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+.info-item span {
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color:
+        rgba(255,255,255,0.45);
+}
+
+.info-separator {
+
+    width: 1px;
+    height: 30px;
+
+    background:
+        rgba(255,255,255,0.18);
+}
+
+
+/* =========================================================
    PEU
-========================================= */
+========================================================= */
 
 .cover-bottom {
+
     position: absolute;
-
-    z-index: 10;
-
-    bottom: 30px;
 
     left: 50px;
     right: 50px;
+    bottom: 28px;
+
+    z-index: 10;
 
     display: flex;
 
     justify-content: space-between;
 
-    color: rgba(255,255,255,0.55);
+    color:
+        rgba(255,255,255,0.40);
 
-    font-size: 10px;
+    font-size: 9px;
+
+    letter-spacing: 2.5px;
+}
+
+
+/* =========================================================
+   INDICADOR
+========================================================= */
+
+.scroll-indicator {
+
+    position: absolute;
+
+    right: 45px;
+    bottom: 35px;
+
+    z-index: 10;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color:
+        rgba(255,255,255,0.35);
+
+    font-size: 8px;
 
     letter-spacing: 2px;
 }
 
+.scroll-line {
 
-/* =========================================
-   ANIMACIÓ
-========================================= */
+    width: 1px;
+    height: 45px;
 
-@keyframes fadeUp {
-
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
+    background:
+        linear-gradient(
+            to bottom,
+            #d62828,
+            transparent
+        );
 }
 
 
-/* =========================================
+/* =========================================================
    MANUAL
-========================================= */
+========================================================= */
 
-#manual {
+.manual-screen {
+
     min-height: 100vh;
 
     display: flex;
@@ -388,48 +604,149 @@ body {
     flex-direction: column;
 
     background:
+
         radial-gradient(
-            circle at top,
-            #202020,
-            #080808 60%
+            circle at 50% 0%,
+            #1b1b1b,
+            #080808 55%
         );
 }
 
-header {
-    padding: 25px 30px 10px;
 
-    text-align: center;
-}
+/* =========================================================
+   HEADER
+========================================================= */
 
-.project-title {
-    font-size: 14px;
+.manual-header {
 
-    letter-spacing: 3px;
-
-    color: #999;
-
-    margin-bottom: 15px;
-}
-
-.progress-container {
-    color: #aaa;
-
-    font-size: 14px;
-}
-
-
-/* =========================================
-   PREGUNTES
-========================================= */
-
-#content {
     width: 100%;
 
-    max-width: 900px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        24px 45px 20px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.07);
+}
+
+
+/* MARCA */
+
+.header-left {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.brand-mark {
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 5px;
+
+    background: #d62828;
+
+    font-weight: 900;
+
+    font-size: 17px;
+}
+
+.brand-title {
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.brand-subtitle {
+
+    margin-top: 3px;
+
+    color: #666;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+
+/* PROGRÉS TEXT */
+
+.header-right {
+
+    color: #888;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   BARRA PROGRÉS
+========================================================= */
+
+.progress-bar-container {
+
+    width: 100%;
+    height: 3px;
+
+    background:
+        rgba(255,255,255,0.05);
+}
+
+.progress-bar {
+
+    height: 100%;
+
+    width: 0%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #941313,
+            #d62828
+        );
+
+    box-shadow:
+        0 0 15px
+        rgba(214,40,40,0.5);
+
+    transition:
+        width .5s
+        cubic-bezier(.16,1,.3,1);
+}
+
+
+/* =========================================================
+   CONTINGUT
+========================================================= */
+
+#content {
+
+    width: min(1000px, 90%);
 
     margin: auto;
 
-    padding: 40px 25px 70px;
+    padding:
+        70px 0 90px;
 
     display: flex;
 
@@ -438,255 +755,618 @@ header {
     justify-content: center;
 
     flex: 1;
+
+    animation:
+        contentAppear
+        .5s
+        ease;
 }
 
+
+/* =========================================================
+   ETIQUETA DIAGNOSI
+========================================================= */
+
 .question-number {
-    text-align: center;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin:
+        0 auto 22px;
 
     color: #d62828;
 
-    font-weight: bold;
+    font-size: 10px;
 
-    font-size: 16px;
+    font-weight: 800;
 
-    margin-bottom: 15px;
+    letter-spacing: 3px;
 }
+
+.question-number::before {
+
+    content: "";
+
+    width: 25px;
+    height: 2px;
+
+    background: #d62828;
+}
+
+
+/* =========================================================
+   PREGUNTA
+========================================================= */
 
 .question {
+
+    max-width: 900px;
+
+    margin:
+        0 auto 55px;
+
     text-align: center;
 
-    font-size: clamp(30px, 5vw, 55px);
+    font-size:
+        clamp(35px, 5.2vw, 68px);
 
-    line-height: 1.15;
+    line-height: 1.08;
 
-    margin-bottom: 50px;
+    letter-spacing: -2px;
+
+    font-weight: 800;
+
+    color: #f5f5f5;
 }
 
 
-/* =========================================
-   BOTONS SÍ / NO
-========================================= */
+/* =========================================================
+   BOTONS
+========================================================= */
 
 .answer-buttons {
+
     display: flex;
 
     justify-content: center;
 
-    gap: 25px;
+    gap: 16px;
 }
 
 .answer-button {
-    border: none;
 
-    border-radius: 8px;
+    min-width: 190px;
 
-    padding: 18px 55px;
-
-    font-size: 20px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-.yes-button {
-    background: #2a9d8f;
-
-    color: white;
-}
-
-.no-button {
-    background: #d62828;
-
-    color: white;
-}
-
-.answer-button:hover {
-    transform: translateY(-3px);
-}
-
-
-/* =========================================
-   PROBLEMA
-========================================= */
-
-.problem-box {
-    background: #171717;
-
-    border: 1px solid #333;
-
-    border-left: 4px solid #d62828;
-
-    border-radius: 12px;
-
-    padding: 30px;
-
-    margin-top: 20px;
-
-    position: relative;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,0.4);
-}
-
-.problem-box h2 {
-    color: #d62828;
-
-    margin-bottom: 20px;
-
-    padding-right: 90px;
-}
-
-.problem-box p {
-    color: #ddd;
-
-    line-height: 1.6;
-
-    font-size: 17px;
-}
-
-
-/* =========================================
-   BOTÓ FET
-========================================= */
-
-.done-button {
-    position: absolute;
-
-    top: 18px;
-    right: 18px;
-
-    border: none;
-
-    background: #2a9d8f;
-
-    color: white;
-
-    padding: 10px 20px;
+    padding: 19px 40px;
 
     border-radius: 7px;
 
-    font-weight: bold;
+    border:
+        1px solid
+        rgba(255,255,255,0.1);
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
 
     cursor: pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border .25s ease;
 }
 
-.done-button:hover {
-    background: #36b5a5;
+.answer-button:hover {
+
+    transform:
+        translateY(-4px);
 }
 
 
-/* =========================================
-   FINAL
-========================================= */
+/* SÍ */
 
-.finish-screen {
-    text-align: center;
+.yes-button {
 
-    margin: auto;
+    background:
+        rgba(42,157,143,0.13);
 
-    padding: 30px;
+    color: #55c9ba;
 
-    max-width: 800px;
+    border-color:
+        rgba(42,157,143,0.35);
 }
 
-.finish-screen h1 {
-    font-size: clamp(40px, 7vw, 70px);
+.yes-button:hover {
 
-    margin-bottom: 25px;
-}
-
-.finish-screen p {
-    color: #bbb;
-
-    font-size: 20px;
-
-    line-height: 1.5;
-
-    margin-bottom: 40px;
-}
-
-.restart-button {
-    border: none;
-
-    background: #d62828;
+    background:
+        #2a9d8f;
 
     color: white;
 
-    padding: 16px 40px;
-
-    border-radius: 8px;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    cursor: pointer;
+    box-shadow:
+        0 12px 30px
+        rgba(42,157,143,0.2);
 }
 
 
-/* =========================================
+/* NO */
+
+.no-button {
+
+    background:
+        rgba(214,40,40,0.10);
+
+    color: #ef5757;
+
+    border-color:
+        rgba(214,40,40,0.35);
+}
+
+.no-button:hover {
+
+    background:
+        #d62828;
+
+    color: white;
+
+    box-shadow:
+        0 12px 30px
+        rgba(214,40,40,0.25);
+}
+
+
+/* =========================================================
+   CAIXA PROBLEMA
+========================================================= */
+
+.problem-box {
+
+    position: relative;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    padding: 38px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.09);
+
+    border-left:
+        4px solid
+        #d62828;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #181818,
+            #101010
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,0.45);
+}
+
+.problem-box h2 {
+
+    padding-right: 120px;
+
+    margin-bottom: 18px;
+
+    color: #fff;
+
+    font-size: 23px;
+}
+
+.problem-box p {
+
+    color:
+        #aaa;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BOTÓ FET
+========================================================= */
+
+.done-button {
+
+    position: absolute;
+
+    top: 22px;
+    right: 22px;
+
+    padding:
+        10px 18px;
+
+    border:
+        1px solid
+        rgba(42,157,143,0.4);
+
+    border-radius: 6px;
+
+    background:
+        rgba(42,157,143,0.12);
+
+    color: #55c9ba;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+.done-button:hover {
+
+    background:
+        #2a9d8f;
+
+    color: white;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.finish-screen {
+
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 50px 20px;
+
+    text-align: center;
+
+    animation:
+        contentAppear
+        .6s
+        ease;
+}
+
+.finish-screen h1 {
+
+    font-size:
+        clamp(45px, 7vw, 80px);
+
+    line-height: .95;
+
+    letter-spacing: -3px;
+
+    margin-bottom: 30px;
+}
+
+.finish-screen p {
+
+    max-width: 650px;
+
+    margin:
+        0 auto 40px;
+
+    color: #999;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+.restart-button {
+
+    padding:
+        17px 30px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background:
+        #d62828;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+
+    box-shadow:
+        0 10px 30px
+        rgba(214,40,40,0.2);
+}
+
+.restart-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #ed3030;
+
+    box-shadow:
+        0 15px 40px
+        rgba(214,40,40,0.35);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.manual-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding:
+        18px 45px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,0.06);
+
+    color: #555;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   ANIMACIONS
+========================================================= */
+
+@keyframes backgroundZoom {
+
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1.09);
+    }
+
+}
+
+@keyframes coverAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+@keyframes contentAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+@keyframes pulse {
+
+    0% {
+        box-shadow:
+            0 0 0 0
+            rgba(214,40,40,0.5);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 8px
+            rgba(214,40,40,0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0
+            rgba(214,40,40,0);
+    }
+
+}
+
+
+/* =========================================================
    MÒBIL
-========================================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
-    .cover-top {
-        left: 25px;
-        right: 25px;
-
-        font-size: 8px;
-    }
-
-    .red-line {
-        left: 25px;
-    }
-
     .cover-content {
-        width: 85%;
+
+        width: 86%;
 
         margin-left: 7%;
+
+        padding: 40px 0;
     }
 
     .cover-content h1 {
-        font-size: 55px;
 
-        letter-spacing: -2px;
+        font-size: 56px;
+
+        letter-spacing: -3px;
     }
 
     .cover-subtitle {
-        font-size: 17px;
+
+        font-size: 16px;
+    }
+
+    .cover-info {
+
+        gap: 15px;
+
+        margin-top: 40px;
+    }
+
+    .info-item strong {
+
+        font-size: 16px;
+    }
+
+    .info-item span {
+
+        font-size: 6px;
     }
 
     .cover-bottom {
-        left: 25px;
-        right: 25px;
+
+        left: 20px;
+        right: 20px;
+
+        bottom: 20px;
 
         font-size: 7px;
     }
 
-    .start-button {
-        width: 100%;
+    .scroll-indicator {
 
-        max-width: 280px;
+        display: none;
     }
 
-    .answer-buttons {
-        flex-direction: column;
+    .manual-header {
+
+        padding:
+            18px 20px;
     }
 
-    .answer-button {
-        width: 100%;
+    .brand-subtitle {
+
+        display: none;
+    }
+
+    .header-right {
+
+        font-size: 9px;
     }
 
     #content {
-        padding: 25px 20px 50px;
+
+        width: 88%;
+
+        padding:
+            50px 0 60px;
+    }
+
+    .question {
+
+        font-size: 38px;
+
+        letter-spacing: -1px;
+
+        margin-bottom: 40px;
+    }
+
+    .answer-buttons {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    .answer-button {
+
+        width: 100%;
     }
 
     .problem-box {
-        padding: 25px 20px;
+
+        padding: 28px 22px;
+    }
+
+    .problem-box h2 {
+
+        font-size: 20px;
+
+        padding-right: 0;
+
+        padding-top: 35px;
+    }
+
+    .done-button {
+
+        top: 16px;
+        right: 16px;
+    }
+
+    .manual-footer {
+
+        padding:
+            15px 20px;
+
+        font-size: 6px;
+    }
+
+}
+
+
+/* =========================================================
+   PANTALLES MOLT PETITES
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .cover-content h1 {
+
+        font-size: 47px;
+    }
+
+    .cover-info {
+
+        gap: 10px;
+    }
+
+    .info-separator {
+
+        height: 25px;
     }
 
 }
